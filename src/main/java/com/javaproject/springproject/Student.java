@@ -1,16 +1,27 @@
 package com.javaproject.springproject;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
+// @Table(name = "t-student")
 public class Student {
     @Id
+    @GeneratedValue
     private int id;
+    // @Column(
+    //     name = "c_fname",
+    //     length = 20
+    // )
     private String firstname;
     private String lastname;
+    @Column(unique = true)
     private String email;
     private int age;
+    // @Column(updatable =  false)
+    // private String some_column;
 
     public Student() {
     }
