@@ -21,6 +21,13 @@ public class FirstController {
         return respository.findAll();
     }
 
+    @GetMapping("/students/search/{student-name}")
+    public List<Student> findStudentsByName(
+            @PathVariable("student-name") String name) {
+                System.out.println(name);
+        return respository.findAllByFirstnameContaining(name);
+    }
+
     @PostMapping("/students")
     public Student post(
             @RequestBody Student student) {
@@ -29,8 +36,7 @@ public class FirstController {
 
     @GetMapping("/students/{student-id}")
     public Student findStudentById(
-        @PathVariable("student-id") Integer id
-    ) {
+            @PathVariable("student-id") Integer id) {
         return respository.findById(id).orElse(new Student());
     }
 
