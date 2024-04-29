@@ -27,15 +27,17 @@ public class StudentController {
     @GetMapping("/students/search/{student-name}")
     public List<Student> findStudentsByName(
             @PathVariable("student-name") String name) {
-        System.out.println(name);
         return respository.findAllByFirstnameContaining(name);
     }
 
     @PostMapping("/students")
-    public Student post(
+    public StudentResponseDto post(
             @RequestBody StudentDto dto) {
-        return respository.save(toStudent(dto));
+        var student = toStudent(dto);
+        var savedStudent = respository.save(student);
+        return toStudentResponseDto(savedStudent);
     }
+
 
     private Student toStudent(StudentDto dto) {
         var student = new Student();
@@ -48,8 +50,18 @@ public class StudentController {
         school.setId(dto.schoolId());
 
         student.setSchool(school);
-         
+
         return student;
+    }
+
+    private StudentResponseDto toStudentResponseDto(Student student) {
+        return new StudentResponseDto(
+                student.getFirstname(),
+                student.getLastname(),
+                student.getEmail(),
+                student.getAge()
+
+        );
     }
 
     @GetMapping("/students/{student-id}")
