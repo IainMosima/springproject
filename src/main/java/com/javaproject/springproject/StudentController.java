@@ -2,17 +2,20 @@ package com.javaproject.springproject;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FirstController {
+public class StudentController {
     private final StudentRespository respository;
 
-    public FirstController(StudentRespository respository) {
+    public StudentController(StudentRespository respository) {
         this.respository = respository;
     }
 
@@ -24,7 +27,7 @@ public class FirstController {
     @GetMapping("/students/search/{student-name}")
     public List<Student> findStudentsByName(
             @PathVariable("student-name") String name) {
-                System.out.println(name);
+        System.out.println(name);
         return respository.findAllByFirstnameContaining(name);
     }
 
@@ -38,6 +41,13 @@ public class FirstController {
     public Student findStudentById(
             @PathVariable("student-id") Integer id) {
         return respository.findById(id).orElse(new Student());
+    }
+
+    @DeleteMapping("/student/{student-id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void Delete(
+            @PathVariable("student-id") Integer id) {
+        respository.deleteById(id); 
     }
 
 }
