@@ -33,8 +33,23 @@ public class StudentController {
 
     @PostMapping("/students")
     public Student post(
-            @RequestBody Student student) {
-        return respository.save(student);
+            @RequestBody StudentDto dto) {
+        return respository.save(toStudent(dto));
+    }
+
+    private Student toStudent(StudentDto dto) {
+        var student = new Student();
+        student.setFirstname(dto.firstname());
+        student.setLastname(dto.lastname());
+        student.setEmail(dto.email());
+        student.setAge(dto.age());
+
+        var school = new School();
+        school.setId(dto.schoolId());
+
+        student.setSchool(school);
+         
+        return student;
     }
 
     @GetMapping("/students/{student-id}")
@@ -47,7 +62,7 @@ public class StudentController {
     @ResponseStatus(HttpStatus.OK)
     public void Delete(
             @PathVariable("student-id") Integer id) {
-        respository.deleteById(id); 
+        respository.deleteById(id);
     }
 
 }
