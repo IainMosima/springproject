@@ -13,68 +13,40 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class StudentController {
-    private final StudentRespository respository;
+    private final StudentService studentService;
 
-    public StudentController(StudentRespository respository) {
-        this.respository = respository;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/students")
-    public List<Student> findAllStudents() {
-        return respository.findAll();
+    public List<StudentResponseDto> findAllStudents() {
+        return studentService.findAllStudents();
     }
 
     @GetMapping("/students/search/{student-name}")
-    public List<Student> findStudentsByName(
+    public List<StudentResponseDto> findStudentsByName(
             @PathVariable("student-name") String name) {
-        return respository.findAllByFirstnameContaining(name);
+        return studentService.findStudentsByName(name);
     }
 
     @PostMapping("/students")
-    public StudentResponseDto post(
+    public StudentResponseDto saveStudent(
             @RequestBody StudentDto dto) {
-        var student = toStudent(dto);
-        var savedStudent = respository.save(student);
-        return toStudentResponseDto(savedStudent);
-    }
-
-
-    private Student toStudent(StudentDto dto) {
-        var student = new Student();
-        student.setFirstname(dto.firstname());
-        student.setLastname(dto.lastname());
-        student.setEmail(dto.email());
-        student.setAge(dto.age());
-
-        var school = new School();
-        school.setId(dto.schoolId());
-
-        student.setSchool(school);
-
-        return student;
-    }
-
-    private StudentResponseDto toStudentResponseDto(Student student) {
-        return new StudentResponseDto(
-                student.getFirstname(),
-                student.getLastname(),
-                student.getEmail(),
-                student.getAge()
-
-        );
+        return studentService.saveStudent(dto);
     }
 
     @GetMapping("/students/{student-id}")
-    public Student findStudentById(
+    public StudentResponseDto findStudentById(
             @PathVariable("student-id") Integer id) {
-        return respository.findById(id).orElse(new Student());
+        return studentService.findStudentById(id);
     }
 
     @DeleteMapping("/student/{student-id}")
     @ResponseStatus(HttpStatus.OK)
     public void Delete(
             @PathVariable("student-id") Integer id) {
-        respository.deleteById(id);
+        studentService.deleteById(id);
     }
 
 }
