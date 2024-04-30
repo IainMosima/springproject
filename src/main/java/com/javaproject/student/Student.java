@@ -1,6 +1,8 @@
-package com.javaproject.springproject;
+package com.javaproject.student;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.javaproject.school.School;
+import com.javaproject.studentprofile.StudentProfile;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

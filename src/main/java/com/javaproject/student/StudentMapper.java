@@ -1,6 +1,8 @@
-package com.javaproject.springproject;
+package com.javaproject.student;
 
 import org.springframework.stereotype.Service;
+
+import com.javaproject.school.School;
 
 @Service
 public class StudentMapper {

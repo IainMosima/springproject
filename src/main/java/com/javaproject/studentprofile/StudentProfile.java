@@ -1,4 +1,6 @@
-package com.javaproject.springproject;
+package com.javaproject.studentprofile;
+
+import com.javaproject.student.Student;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

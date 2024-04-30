@@ -1,4 +1,4 @@
-package com.javaproject.springproject;
+package com.javaproject.student;
 
 import java.util.List;
 

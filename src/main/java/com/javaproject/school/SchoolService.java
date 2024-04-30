@@ -1,4 +1,4 @@
-package com.javaproject.springproject;
+package com.javaproject.school;
 
 import java.util.List;
 import java.util.stream.Collectors;
