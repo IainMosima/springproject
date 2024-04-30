@@ -1,10 +1,13 @@
 package com.javaproject.student;
 
-public record StudentDto(
-        String firstname,
-        String lastname,
-        String email,
-        Integer age,
-        Integer schoolId) {
+import jakarta.validation.constraints.NotEmpty;
 
+public record StudentDto(
+                @NotEmpty
+                String firstname,
+                @NotEmpty
+                String lastname,
+                String email,
+                Integer age,
+                Integer schoolId) {
 }

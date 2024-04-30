@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class StudentController {
     private final StudentService studentService;
@@ -32,7 +34,7 @@ public class StudentController {
 
     @PostMapping("/students")
     public StudentResponseDto saveStudent(
-            @RequestBody StudentDto dto) {
+            @Valid @RequestBody StudentDto dto) {
         return studentService.saveStudent(dto);
     }
 
