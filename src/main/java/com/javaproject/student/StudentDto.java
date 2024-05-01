@@ -8,6 +8,5 @@ public record StudentDto(
                 @NotEmpty
                 String lastname,
                 String email,
-                Integer age,
                 Integer schoolId) {
 }

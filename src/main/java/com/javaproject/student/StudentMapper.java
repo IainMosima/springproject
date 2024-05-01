@@ -11,7 +11,7 @@ public class StudentMapper {
         student.setFirstname(dto.firstname());
         student.setLastname(dto.lastname());
         student.setEmail(dto.email());
-        student.setAge(dto.age());
+        // student.setAge(dto.age());
 
         var school = new School();
         school.setId(dto.schoolId());
@@ -25,9 +25,7 @@ public class StudentMapper {
         return new StudentResponseDto(
                 student.getFirstname(),
                 student.getLastname(),
-                student.getEmail(),
-                student.getAge()
-
+                student.getEmail()
         );
     }
 }
