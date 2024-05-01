@@ -6,6 +6,7 @@ import com.javaproject.school.School;
 
 @Service
 public class StudentMapper {
+    
     public Student toStudent(StudentDto dto) {
         var student = new Student();
         student.setFirstname(dto.firstname());
@@ -28,4 +29,5 @@ public class StudentMapper {
                 student.getEmail()
         );
     }
+
 }
